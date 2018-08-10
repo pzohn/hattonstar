@@ -1,0 +1,5 @@
+  <view class="item">
+     <text>金额：</text> 
+     <input type="number" name="price" value= '{{price}}'/>
+  </view>
+  <button class="btn" type="primary" bindtap="pay">付款</button>

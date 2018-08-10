@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/information/information",
+    "pages/login/login",
+    "pages/card/card",
+    "pages/edit/edit",
+    "pages/code/code",
+    "pages/registor/registor"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "哈顿星球",
+    "navigationBarTextStyle": "black"
+  }
+}
