@@ -12,7 +12,7 @@
     height: 40px;
     width: 90%;
     border-radius: 3px;
-    background-color: #ceda267e;
+    background-color: #d1c628d7;
     margin-bottom:15px;
 }
 .item text{
@@ -22,21 +22,21 @@
 }
 
 .btn{
-    width: 45%;
+    width: 66%;
     color: #999999;
-    margin-top:40px; 
+    margin-top:6px; 
 }
 
 .btn1{
-    width: 45%;
+    width: 66%;
     color: #999999;
-    margin-top:40px; 
+    margin-top:6px; 
 }
 
 .btn2{
-    width: 45%;
+    width: 66%;
     color: #999999;
-    margin-top:40px; 
+    margin-top:6px; 
 }
 
 .button{

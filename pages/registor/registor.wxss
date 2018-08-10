@@ -8,11 +8,11 @@
 }
 .item{
     margin: 0 auto;
-    border: 1px solid #cccccc;
+    border: 1px solid #16c0c0;
     height: 40px;
     width: 90%;
     border-radius: 3px;
-    background-color: #ffffff;
+    background-color: #e2a386;
     margin-bottom:15px;
 }
 .item input{
@@ -22,7 +22,7 @@
 }
 .holder{
     font-size: 14px;
-    color: #999999;
+    color: #833b73;
 }
 .flex{
     display: flex;
@@ -37,11 +37,11 @@
 }
 
 .age{
-    border: 1px solid #cccccc;
+    border: 1px solid #16c0c0;
     height: 40px;
     width: 50%;
     border-radius: 3px;
-    background-color: #ffffff;
+    background-color: #e2a386;
     margin-bottom:15px;
     display:flex;
     flex-direction: row;

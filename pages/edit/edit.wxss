@@ -8,11 +8,11 @@
 }
 .item{
     margin: 0 auto;
-    border: 1px solid #cccccc;
+    border: 1px solid #b1c02c;
     height: 40px;
     width: 90%;
     border-radius: 3px;
-    background-color: #ffffff;
+    background-color: #38cfc8;
     margin-bottom:15px;
     display: flex;
     flex-direction: row;

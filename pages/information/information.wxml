@@ -40,8 +40,8 @@
 
   <view class="button">
       <button class="btn" type="primary" bindtap="edit">修改信息</button>
+      <button class="btn2" disabled="{{disabled}}" type="{{btnstate}}" bindtap="buy">购买卡片</button>
       <button class="btn1" type="primary" bindtap="createcode">生成电子票</button>
-       <button class="btn2" disabled="{{disabled}}" type="{{btnstate}}" bindtap="buy">购买卡片</button>
   </view>
 </view>
 

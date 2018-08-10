@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/information/information",
     "pages/login/login",
-    "pages/card/card",
     "pages/edit/edit",
-    "pages/code/code",
-    "pages/registor/registor"
+    "pages/registor/registor",
+    "pages/information/information",
+    "pages/card/card",
+    "pages/code/code"
   ],
   "window": {
     "backgroundTextStyle": "light",
