@@ -44,6 +44,12 @@ App({
     mother:'',
     address:'',
     carddesc:'',
-    cardnum:0
+    cardnum:0,
+    detailid:0,
+    body:'',
+    imageNo:0,
+    cardtype:0,
+    cardprice:0,
+    playnum:0
   }
 })

@@ -4,6 +4,7 @@
     "pages/edit/edit",
     "pages/registor/registor",
     "pages/information/information",
+    "pages/buy/buy",
     "pages/card/card",
     "pages/code/code"
   ],

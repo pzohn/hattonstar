@@ -58,7 +58,7 @@ Page({
 
   buy: function () {
     wx.navigateTo({
-      url: '../card/card',
+      url: '../buy/buy',
     })
   },
   /**

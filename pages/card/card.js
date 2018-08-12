@@ -1,25 +1,59 @@
-// pages/card1/card.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    imageName:'',
+    cardprice:0,
+    cardtime:'',
+    playnum:0
   },
   pay:function() {
     wx.login({
       success: res => {
         var code = res.code;
+        var app = getApp();
+        console.log(app);
+        if (app.globalData.detailid == 0)
+        {
+          wx.showModal({
+            title: '错误提示',
+            content: '商品订购出错，请重新订购',
+            confirmText: '重新订购',
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '../buy/buy',
+                })
+              }
+            }
+          });
+          return;
+        }
+        if (app.globalData.phone == '') {
+          wx.showModal({
+            title: '用户未登录',
+            content: '用户未登录或登录超时，请重新登录',
+            confirmText: '重新登录',
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '../login/login',
+                })
+              }
+            }
+          });
+          return;
+        }
         if (code) {
           wx.request({
             url: 'https://www.hattonstar.com/onPay',
             data: {
               js_code: code,
-              body: '哈顿星球成长学院-cardone',
-              total_fee: 1,
-              detail_id: 1,
-              phone: '18303741618',
+              body: app.globalData.body,
+              detail_id: app.globalData.detailid,
+              phone: app.globalData.phone,
             },
             method: 'POST',
             success: function (res) {
@@ -32,6 +66,7 @@ Page({
                   'signType': 'MD5',
                   'paySign': res.data.paySign,
                   'success': function (res) {
+                    console.log(1);
                     console.log(res);
                   },
                   'fail': function (res) {
@@ -52,18 +87,42 @@ Page({
       }
     })
   },
+
+  rechoose: function () {
+    var app = getApp();
+    app.globalData.imageNo = 0;
+    app.globalData.cardtype = 0;
+    app.globalData.cardprice = 0;
+    app.globalData.cardtype = 0;
+    wx.navigateTo({
+      url: '../buy/buy',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    var app = getApp();
+    var imageNo = app.globalData.imageNo;
+    var type = app.globalData.cardtype;
+    var typetime = '';
+    if (type == 1) {
+      typetime = '9:00-13:00或13:30-17:30';
+    } else if (type == 2) {
+      typetime = '9:00-17:30';
+    } else if (type == 3) {
+      typetime = '11:00-13:00或15:30-17:30';
+    }
+    var name = '/images/list/star' + imageNo + '.jpg';
+    this.setData({ imageName: name, cardprice: app.globalData.cardprice,
+      playnum: app.globalData.playnum, cardtime: typetime});
   },
 
   /**
