@@ -8,7 +8,8 @@ Page({
     disabled:true,
     btnstate:"default",
     account: '',
-    password: ''
+    password: '',
+    array: []
   },
 
   register:function(){
@@ -117,7 +118,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var str = "" + options.q; var arr = str.split("3D");
+    var shopID = arr[1];
+    var app = getApp();
+    if (shopID == undefined)
+    {
+      
+    }
+    else
+    {
+      app.globalData.shopId = shopID;
+    }
   },
 
   /**

@@ -40,7 +40,7 @@ Page({
             showCancel: false,
             success: function (res) {
               if (res.confirm) {
-                wx.navigateTo({
+                wx.redirectTo({
                   url: '../login/login',
                 })
               }

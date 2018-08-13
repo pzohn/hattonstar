@@ -127,6 +127,9 @@ Page({
         app.globalData.cardprice = res.data.PRICE;
         app.globalData.cardtype = res.data.TYPE;
         app.globalData.playnum = res.data.USENUM;
+        wx.redirectTo({
+          url: '../card/card',
+        })
       },
       fail: function (res) {
         wx.showModal({
@@ -139,9 +142,6 @@ Page({
           }
         })
       }
-    })
-    wx.navigateTo({
-      url: '../card/card',
     })
   }
 })

@@ -23,7 +23,7 @@ Page({
             confirmText: '重新订购',
             success: function (res) {
               if (res.confirm) {
-                wx.navigateTo({
+                wx.redirectTo({
                   url: '../buy/buy',
                 })
               }
@@ -38,7 +38,7 @@ Page({
             confirmText: '重新登录',
             success: function (res) {
               if (res.confirm) {
-                wx.navigateTo({
+                wx.redirectTo({
                   url: '../login/login',
                 })
               }
@@ -54,6 +54,7 @@ Page({
               body: app.globalData.body,
               detail_id: app.globalData.detailid,
               phone: app.globalData.phone,
+              shop_id: app.globalData.shopId
             },
             method: 'POST',
             success: function (res) {
@@ -66,16 +67,52 @@ Page({
                   'signType': 'MD5',
                   'paySign': res.data.paySign,
                   'success': function (res) {
-                    console.log(1);
-                    console.log(res);
+
+                    wx.request({
+                      url: 'https://www.hattonstar.com/onGetUpdateResult',
+                      data: {
+                        PHONE: app.globalData.phone
+                      },
+                      method: 'POST',
+                      success: function (res) {
+                      if (res.data.PHONE != "") {
+                          var app = getApp();
+                          app.globalData.carddesc = res.data.CARDDESC;
+                          app.globalData.cardnum = res.data.CARDNUM;
+                        }
+                      },
+                      fail: function (res) {
+                        wx.showModal({
+                          title: '错误提示',
+                          content: '服务器无响应，请重新登录',
+                          success: function (res) {
+                            if (res.confirm) {
+                              wx.redirectTo({
+                                url: '../login/login',
+                              })
+                            }
+                          }
+                        })
+                      return;
+                      }
+                    })
+
+                    wx.showModal({
+                      title: '支付成功',
+                      content: '支付成功，欢迎开启哈顿星球畅玩之旅!',
+                      success: function (res) {
+                        if (res.confirm) {
+                          wx.redirectTo({
+                            url: '../information/information',
+                          })
+                        }
+                      }
+                    })
                   },
                   'fail': function (res) {
                     console.log(2);
-                    console.log(res);
                   },
                   'complete': function (res) {
-                    console.log(3);
-                    console.log(res);
                   }
                 })
             },
@@ -89,12 +126,13 @@ Page({
   },
 
   rechoose: function () {
+    console.log("rechoose");
     var app = getApp();
     app.globalData.imageNo = 0;
     app.globalData.cardtype = 0;
     app.globalData.cardprice = 0;
     app.globalData.cardtype = 0;
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../buy/buy',
     })
   },
@@ -102,13 +140,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
     var app = getApp();
     var imageNo = app.globalData.imageNo;
     var type = app.globalData.cardtype;
@@ -121,15 +152,24 @@ Page({
       typetime = '11:00-13:00或15:30-17:30';
     }
     var name = '/images/list/star' + imageNo + '.jpg';
-    this.setData({ imageName: name, cardprice: app.globalData.cardprice,
-      playnum: app.globalData.playnum, cardtime: typetime});
+    this.setData({
+      imageName: name, cardprice: app.globalData.cardprice,
+      playnum: app.globalData.playnum, cardtime: typetime
+    });
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
