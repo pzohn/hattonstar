@@ -22,24 +22,30 @@
 }
 
 .btn{
-    width: 66%;
+    width: 40%;
     color: #999999;
     margin-top:6px; 
 }
 
 .btn1{
-    width: 66%;
+    width: 40%;
     color: #999999;
     margin-top:6px; 
 }
 
 .btn2{
-    width: 66%;
+    width: 40%;
+    color: #999999;
+    margin-top:6px; 
+}
+
+.btn3{
+    width: 40%;
     color: #999999;
     margin-top:6px; 
 }
 
 .button{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }

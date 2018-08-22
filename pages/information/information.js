@@ -21,27 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var app = getApp();
-    console.log(app);
-    if (app.globalData.sex == 1){
-      this.setData({ sex: 'Boy' });
-    }
-    if (app.globalData.carddesc != "") {
-      this.setData({ carddesc: app.globalData.carddesc });
-    }
-    this.setData({ phone: app.globalData.phone });
-    this.setData({ name: app.globalData.name });
-    this.setData({ age: app.globalData.age });
-    this.setData({ father: app.globalData.father });
-    this.setData({ mother: app.globalData.mother });
-    this.setData({ address: app.globalData.address });
-    this.setData({ cardnum: app.globalData.cardnum });
-
-    if (app.globalData.cardnum > 0) {
-      this.setData({ disabled: true, btnstate: "default" });
-    } else {
-      this.setData({ disabled: false, btnstate: "primary" });
-    }
+    this.updateInfo();
   },
   
   createcode:function(){
@@ -61,6 +41,72 @@ Page({
       url: '../buy/buy',
     })
   },
+
+  update: function () {
+    var app = getApp();
+    wx.request({
+      url: 'https://www.hattonstar.com/onGetUpdateResult',
+      data: {
+        PHONE: app.globalData.phone
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.PHONE != "") {
+          app.globalData.carddesc = res.data.CARDDESC;
+          app.globalData.cardnum = res.data.CARDNUM;
+          app.globalData.name = res.data.NAME;
+          app.globalData.age = res.data.AGE;
+          app.globalData.father = res.data.FATHER;
+          app.globalData.mother = res.data.MOTHER;
+          app.globalData.address = res.data.ADDRESS;
+          app.globalData.cardnum = res.data.CARDNUM;
+          wx.redirectTo({
+            url: '../information/information',
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请重新登录',
+          success: function (res) {
+            if (res.confirm) {
+              wx.redirectTo({
+                url: '../login/login',
+              })
+            }
+          }
+        })
+        return;
+      }
+    })
+  },
+
+  updateInfo:function () {
+    var app = getApp();
+    if (app.globalData.sex == 1) {
+      this.setData({ sex: 'Boy' });
+    }
+    if (app.globalData.carddesc != "") {
+      this.setData({ carddesc: app.globalData.carddesc });
+    }
+    this.setData({ phone: app.globalData.phone });
+    this.setData({ name: app.globalData.name });
+    this.setData({ age: app.globalData.age });
+    this.setData({ father: app.globalData.father });
+    this.setData({ mother: app.globalData.mother });
+    this.setData({ address: app.globalData.address });
+    this.setData({ cardnum: app.globalData.cardnum });
+    console.log(app.globalData.cardnum);
+    console.log(this.data.cardnum);
+
+    if (app.globalData.cardnum > 0) {
+      this.setData({ disabled: true, btnstate: "default" });
+    } else {
+      this.setData({ disabled: false, btnstate: "primary" });
+    }
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

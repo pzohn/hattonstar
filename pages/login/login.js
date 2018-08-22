@@ -36,7 +36,6 @@ Page({
       },
       method:'POST',
       success:function(res){
-        console.log(res);
         if(res.data == 0){
           wx.showModal({
             title: '错误提示',
