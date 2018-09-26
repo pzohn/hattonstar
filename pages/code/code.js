@@ -10,8 +10,8 @@ Page({
     // 页面初始化 options为页面跳转所带来的参数
     var size = this.setCanvasSize();//动态设置画布大小
     //var initUrl = this.data.placeholder;
-    var app = getApp();
-    var initUrl = app.globalData.phone + "";
+    var initUrl = options.phone + "";
+    console.log(initUrl);
     this.createQrCode(initUrl, "mycanvas", size.w, size.h);
 
   },

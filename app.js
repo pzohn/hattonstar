@@ -51,6 +51,15 @@ App({
     cardtype:0,
     cardprice:0,
     playnum:0,
-    shopId:0
+    shopId:0,
+    shop_id:0,
+    shop_phone:'',
+    shop_name:'',
+    shop_address:'',
+    shop_user:'',
+    card_one_num:0,
+    card_two_num:0,
+    card_one_price:0,
+    card_two_price:0
   }
 })

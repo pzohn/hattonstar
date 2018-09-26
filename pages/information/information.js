@@ -6,6 +6,7 @@ Page({
    */
   data: {
     disabled: true,
+    disabled1: false,
     phone:'',
     name:'',
     sex:'Girl',
@@ -25,8 +26,10 @@ Page({
   },
   
   createcode:function(){
+    var app = getApp();
+    var phone = app.globalData.phone;
     wx.navigateTo({
-      url: '../code/code',
+      url: '../code/code?phone=' + phone,
     })
   },
 
@@ -101,9 +104,13 @@ Page({
     console.log(this.data.cardnum);
 
     if (app.globalData.cardnum > 0) {
-      this.setData({ disabled: true, btnstate: "default" });
+      this.setData({ disabled: true, btnstate: "default",
+        disabled1: false, btnstate1: "primary"
+       });
     } else {
-      this.setData({ disabled: false, btnstate: "primary" });
+      this.setData({ disabled: false, btnstate: "primary",
+        disabled1: true, btnstate1: "default"
+       });
     }
   },
 

@@ -1,0 +1,38 @@
+<form bindsubmit="formSubmit" bindreset="formReset">
+<view class="content">
+  <view class="hr"></view>
+  <view class="item">
+     <text>商铺名称：</text> 
+     <text>{{name}}</text>
+  </view>
+  <view class="item">
+     <text>联系人：</text> 
+     <text>{{user}}</text>
+  </view>
+  <view class="item">
+     <text>联系电话：</text> 
+     <text>{{phone}}</text>
+  </view>
+  <view class="item">
+     <text>商铺住址：</text> 
+     <text>{{address}}</text>
+  </view>
+  <view class="item">
+     <text>日常卡剩余次数：</text> 
+     <text>{{card_one_num}}</text>
+  </view>
+  <view class="item">
+     <text>周末卡剩余次数：</text> 
+     <text>{{card_two_num}}</text>
+  </view>
+  <view class="button">
+      <button class="btn2" type="primary" bindtap="buy">购买卡片</button>
+      <button class="btn1" disabled="{{disabled}}" type="{{btnstate}}" bindtap="createcode">出票</button>
+  </view>
+  <view class="button">
+      <button class="btn3" type="primary" bindtap="update">刷新</button>
+      <button class="btn" type="primary" bindtap="callme">联系我们</button>
+  </view>
+</view>
+
+</form>

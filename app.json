@@ -1,12 +1,18 @@
 {
   "pages": [
     "pages/login/login",
+    "pages/shoplogin/shoplogin",
+    "pages/shopbuy/shopbuy",
+    "pages/callme/callme",
     "pages/edit/edit",
     "pages/registor/registor",
     "pages/information/information",
     "pages/buy/buy",
     "pages/card/card",
-    "pages/code/code"
+    "pages/code/code",
+    "pages/shopinfo/shopinfo",
+    "pages/find/find",
+    "pages/shopcard/shopcard"
   ],
   "window": {
     "backgroundTextStyle": "light",

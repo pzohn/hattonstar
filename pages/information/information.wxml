@@ -44,7 +44,7 @@
   </view>
     <view class="button">
       <button class="btn2" disabled="{{disabled}}" type="{{btnstate}}" bindtap="buy">购买卡片</button>
-      <button class="btn1" type="primary" bindtap="createcode">生成电子票</button>
+      <button class="btn1" disabled="{{disabled1}}" type="{{btnstate1}}" bindtap="createcode">生成电子票</button>
   </view>
 </view>
 

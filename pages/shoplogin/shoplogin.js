@@ -5,86 +5,68 @@ Page({
    * 页面的初始数据
    */
   data: {
-    disabled:true,
-    btnstate:"default",
+    disabled: true,
+    btnstate: "default",
     account: '',
     password: '',
     array: []
   },
-
-  register:function(){
-    wx.navigateTo({
-      url: '../registor/registor',
-    })
-  },
-
-  login:function(){
-    if (this.data.password == "")
-    {
+  
+  login: function () {
+    if (this.data.password == "") {
       wx.showModal({
         title: '错误提示',
         content: '密码不能为空!',
       });
       return;
     }
-    var phone = this.data.account;
     wx.request({
-      url: 'https://www.hattonstar.com/user/save',
-      data:{
-        type:'select',
-        PHONE: this.data.account,
-        PASSWORD: this.data.password
+      url: 'https://www.hattonstar.com/getShop',
+      data: {
+        phone: this.data.account,
+        pass: this.data.password
       },
-      method:'POST',
-      success:function(res){
-        if(res.data == 0){
+      method: 'POST',
+      success: function (res) {
+        if (res.data == 0) {
+          console.log(res);
           wx.showModal({
             title: '错误提示',
-            content: '用户未注册,请注册!',
-            confirmText: '注册',
+            content: '商户未注册,请联系我们进行注册！',
+            confirmText: '联系我们',
             success: function (res) {
               if (res.confirm) {
                 wx.navigateTo({
-                  url: '../registor/registor',
+                  url: '../callme/callme',
                 })
               }
             }
           })
         }
-        else if (res.data == 1){
+        else if (res.data == 1) {
           wx.showModal({
             title: '错误提示',
-            content: '密码错误,请重试！',
-            confirmText: '找回密码',
-            success: function (res) {
-              if (res.confirm) {
-                wx.navigateTo({
-                  url: '../find/find?phone=' + phone,
-                })
-              }
-            }
-          }) 
+            content: '密码错误,请重试!',
+            showCancel: false
+          })
         }
-        else{
-          if (res.data.PHONE != "")
-          {
+        else {
+          if (res.data.phone != "") {
             var app = getApp();
-            app.globalData.id = res.data.ID;
-            app.globalData.phone = res.data.PHONE;
-            app.globalData.name = res.data.NAME;
-            app.globalData.sex = res.data.SEX;
-            app.globalData.age = res.data.AGE;
-            app.globalData.father = res.data.FATHER;
-            app.globalData.mother = res.data.MOTHER;
-            app.globalData.address = res.data.ADDRESS;
-            app.globalData.carddesc = res.data.CARDDESC;
-            app.globalData.cardnum = res.data.CARDNUM;
+            app.globalData.shop_id = res.data.id;
+            app.globalData.shop_phone = res.data.phone;
+            app.globalData.shop_name = res.data.name;
+            app.globalData.shop_address = res.data.address;
+            app.globalData.shop_user = res.data.user;
+            app.globalData.card_one_num = res.data.card_one_num;
+            app.globalData.card_two_num = res.data.card_two_num;
+            app.globalData.card_one_price = res.data.card_one_price;
+            app.globalData.card_two_price = res.data.card_two_price;
             wx.navigateTo({
-              url: '../information/information',
+              url: '../shopinfo/shopinfo',
             })
           }
-          else
-          {
+          else {
             wx.showModal({
               title: '错误提示',
               content: '服务器繁忙，请稍后再试!',
@@ -97,27 +79,27 @@ Page({
         wx.showModal({
           title: '错误提示',
           content: '服务器无响应，请联系工作人员!',
-          success:function(res){
-            if(res.confirm){
-            }else if(res.cancel){
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
             }
           }
         })
       }
     })
   },
-  accountInput:function(e) {
+  accountInput: function (e) {
     var content = e.detail.value;
-    if(content != ''){
-      this.setData({ disabled: false, btnstate: "primary", account:content});
-    }else{
-      this.setData({ disabled: true, btnstate: "default"});
+    if (content != '') {
+      this.setData({ disabled: false, btnstate: "primary", account: content });
+    } else {
+      this.setData({ disabled: true, btnstate: "default" });
     }
   },
 
-  pwdBlur:function(e) {
+  pwdBlur: function (e) {
     var password = e.detail.value;
-    if(password != ''){
+    if (password != '') {
       this.setData({ password: password });
     }
   },
@@ -128,12 +110,10 @@ Page({
     var str = "" + options.q; var arr = str.split("3D");
     var shopID = arr[1];
     var app = getApp();
-    if (shopID == undefined)
-    {
-      
+    if (shopID == undefined) {
+
     }
-    else
-    {
+    else {
       app.globalData.shopId = shopID;
     }
   },
@@ -142,48 +122,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

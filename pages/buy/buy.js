@@ -66,7 +66,7 @@ Page({
 
   earth: function() {
     var app = getApp();
-    app.globalData.detailid = 1;
+    app.globalData.detailid = 2;
     app.globalData.body = '哈顿星球成长学院-地球卡';
     app.globalData.imageNo = 1;
     this.card();
