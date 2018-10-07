@@ -60,6 +60,11 @@ App({
     card_one_num:0,
     card_two_num:0,
     card_one_price:0,
-    card_two_price:0
+    card_two_price:0,
+    parter_phone:'',
+    parter_name:'',
+    day_num:0,
+    month_num:0,
+    total_num:0
   }
 })

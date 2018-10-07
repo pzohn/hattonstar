@@ -155,7 +155,7 @@ Page({
       typetime = '周二至周五';
       cardprice = app.globalData.card_one_price;
     } else if (app.globalData.detailid == 2) {
-      typetime = '周六周日';
+      typetime = '法定节假日';
       cardprice = app.globalData.card_two_price;
     } 
     var name = '/images/list/star' + imageNo + '.jpg';

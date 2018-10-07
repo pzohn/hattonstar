@@ -5,14 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    flag:false,
+    test:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var app = getApp();
+    if (app.globalData.shopId != 0){
+      this.setData({ flag:true});
+    }
+    if (app.globalData.phone == '18303741618'){
+      this.setData({ test: true });
+    }
   },
 
   /**
@@ -67,50 +74,74 @@ Page({
   earth: function() {
     var app = getApp();
     app.globalData.detailid = 2;
-    app.globalData.body = '哈顿星球成长学院-地球卡';
+    app.globalData.body = '哈顿星球-地球卡';
     app.globalData.imageNo = 1;
     this.card();
   },
   mars: function () {
     var app = getApp();
     app.globalData.detailid = 3;
-    app.globalData.body = '哈顿星球成长学院-火星卡';
+    app.globalData.body = '哈顿星球-火星卡';
     app.globalData.imageNo = 2;
     this.card();
   },
   jupiter: function () {
     var app = getApp();
     app.globalData.detailid = 4;
-    app.globalData.body = '哈顿星球成长学院-木星卡';
+    app.globalData.body = '哈顿星球-木星卡';
     app.globalData.imageNo = 3;
     this.card();
   },
   venus: function () {
     var app = getApp();
     app.globalData.detailid = 5;
-    app.globalData.body = '哈顿星球成长学院-金星卡';
+    app.globalData.body = '哈顿星球-金星卡';
     app.globalData.imageNo = 4;
     this.card();
   },
   mercury: function () {
     var app = getApp();
     app.globalData.detailid = 6;
-    app.globalData.body = '哈顿星球成长学院-水星卡';
+    app.globalData.body = '哈顿星球-水星卡';
     app.globalData.imageNo = 5;
     this.card();
   },
   saturn: function () {
     var app = getApp();
     app.globalData.detailid = 7;
-    app.globalData.body = '哈顿星球成长学院-土星卡';
+    app.globalData.body = '哈顿星球-土星卡';
     app.globalData.imageNo = 6;
     this.card();
   },
   uranus: function () {
     var app = getApp();
     app.globalData.detailid = 8;
-    app.globalData.body = '哈顿星球成长学院-天王星卡';
+    app.globalData.body = '哈顿星球-天王星卡';
     app.globalData.imageNo = 7;
+    this.card();
+  },
+
+  neptune: function () {
+    var app = getApp();
+    app.globalData.detailid = 23;
+    app.globalData.body = '哈顿星球-日常团购卡';
+    app.globalData.imageNo = 9;
+    this.card();
+  },
+
+  sun: function () {
+    var app = getApp();
+    app.globalData.detailid = 24;
+    app.globalData.body = '哈顿星球-节假日团购卡';
+    app.globalData.imageNo = 9;
+    this.card();
+  },
+
+  star: function () {
+    var app = getApp();
+    app.globalData.detailid = 25;
+    app.globalData.body = '哈顿星球-测试卡';
+    app.globalData.imageNo = 9;
     this.card();
   },
 

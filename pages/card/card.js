@@ -7,7 +7,8 @@ Page({
     imageName:'',
     cardprice:0,
     cardtime:'',
-    playnum:0
+    playnum:0,
+    notice:'此卡为儿童专属'
   },
   pay:function() {
     wx.login({
@@ -15,8 +16,7 @@ Page({
         var code = res.code;
         var app = getApp();
         console.log(app);
-        if (app.globalData.detailid == 0)
-        {
+        if (app.globalData.detailid == 0){
           wx.showModal({
             title: '错误提示',
             content: '商品订购出错，请重新订购',
@@ -46,79 +46,131 @@ Page({
           });
           return;
         }
-        if (code) {
+        if (app.globalData.phone != '') {
           wx.request({
-            url: 'https://www.hattonstar.com/onPay',
+            url: 'https://www.hattonstar.com/onGetUpdateResult',
             data: {
-              js_code: code,
-              body: app.globalData.body,
-              detail_id: app.globalData.detailid,
-              phone: app.globalData.phone,
-              shop_id: app.globalData.shopId,
-              name: app.globalData.name
+              PHONE: app.globalData.phone
             },
             method: 'POST',
             success: function (res) {
-              console.log(res);
-              wx.requestPayment(
-                {
-                  'timeStamp': res.data.timeStamp,
-                  'nonceStr': res.data.nonceStr,
-                  'package': res.data.package,
-                  'signType': 'MD5',
-                  'paySign': res.data.paySign,
-                  'success': function (res) {
-
+              if (res.data.PHONE != "") {
+                app.globalData.carddesc = res.data.CARDDESC;
+                app.globalData.cardnum = res.data.CARDNUM;
+                app.globalData.name = res.data.NAME;
+                app.globalData.age = res.data.AGE;
+                app.globalData.father = res.data.FATHER;
+                app.globalData.mother = res.data.MOTHER;
+                app.globalData.address = res.data.ADDRESS;
+                app.globalData.cardnum = res.data.CARDNUM;
+                if (app.globalData.cardnum != 0) {
+                  wx.showModal({
+                    title: '游玩卡有剩余',
+                    content: '游玩卡还有剩余次数，请消费完再购买',
+                    confirmText: '返回刷新',
+                    success: function (res) {
+                      if (res.confirm) {
+                        wx.redirectTo({
+                          url: '../information/information',
+                        })
+                      }
+                    }
+                  });
+                  return;
+                }
+                else{
+                  if (code) {
                     wx.request({
-                      url: 'https://www.hattonstar.com/onGetUpdateResult',
+                      url: 'https://www.hattonstar.com/onPay',
                       data: {
-                        PHONE: app.globalData.phone
+                        js_code: code,
+                        body: app.globalData.body,
+                        detail_id: app.globalData.detailid,
+                        phone: app.globalData.phone,
+                        shop_id: app.globalData.shopId,
+                        name: app.globalData.name
                       },
                       method: 'POST',
                       success: function (res) {
-                      if (res.data.PHONE != "") {
-                          var app = getApp();
-                          app.globalData.carddesc = res.data.CARDDESC;
-                          app.globalData.cardnum = res.data.CARDNUM;
-                        }
+                        console.log(res);
+                        wx.requestPayment(
+                          {
+                            'timeStamp': res.data.timeStamp,
+                            'nonceStr': res.data.nonceStr,
+                            'package': res.data.package,
+                            'signType': 'MD5',
+                            'paySign': res.data.paySign,
+                            'success': function (res) {
+
+                              wx.request({
+                                url: 'https://www.hattonstar.com/onGetUpdateResult',
+                                data: {
+                                  PHONE: app.globalData.phone
+                                },
+                                method: 'POST',
+                                success: function (res) {
+                                  if (res.data.PHONE != "") {
+                                    var app = getApp();
+                                    app.globalData.carddesc = res.data.CARDDESC;
+                                    app.globalData.cardnum = res.data.CARDNUM;
+                                  }
+                                },
+                                fail: function (res) {
+                                  wx.showModal({
+                                    title: '错误提示',
+                                    content: '服务器无响应，请重新登录',
+                                    success: function (res) {
+                                      if (res.confirm) {
+                                        wx.redirectTo({
+                                          url: '../login/login',
+                                        })
+                                      }
+                                    }
+                                  })
+                                  return;
+                                }
+                              })
+
+                              wx.showModal({
+                                title: '支付成功',
+                                content: '支付成功，欢迎开启哈顿星球畅玩之旅!',
+                                success: function (res) {
+                                  if (res.confirm) {
+                                    wx.redirectTo({
+                                      url: '../information/information',
+                                    })
+                                  }
+                                }
+                              })
+                            },
+                            'fail': function (res) {
+                              console.log(2);
+                            },
+                            'complete': function (res) {
+                            }
+                          })
                       },
                       fail: function (res) {
-                        wx.showModal({
-                          title: '错误提示',
-                          content: '服务器无响应，请重新登录',
-                          success: function (res) {
-                            if (res.confirm) {
-                              wx.redirectTo({
-                                url: '../login/login',
-                              })
-                            }
-                          }
-                        })
-                      return;
+                        console.log(res);
                       }
                     })
-
-                    wx.showModal({
-                      title: '支付成功',
-                      content: '支付成功，欢迎开启哈顿星球畅玩之旅!',
-                      success: function (res) {
-                        if (res.confirm) {
-                          wx.redirectTo({
-                            url: '../information/information',
-                          })
-                        }
-                      }
-                    })
-                  },
-                  'fail': function (res) {
-                    console.log(2);
-                  },
-                  'complete': function (res) {
                   }
-                })
+                }
+              }
             },
             fail: function (res) {
-              console.log(res);
+              wx.showModal({
+                title: '错误提示',
+                content: '服务器无响应，请重新登录',
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.redirectTo({
+                      url: '../login/login',
+                    })
+                  }
+                }
+              })
+              return;
             }
           })
         }
@@ -157,6 +209,10 @@ Page({
       imageName: name, cardprice: app.globalData.cardprice,
       playnum: app.globalData.playnum, cardtime: typetime
     });
+    var detail_id = app.globalData.detailid;
+    if (detail_id == 23 || detail_id == 24){
+      this.setData({ notice:'此卡包含一个大人一个小孩'});
+    }
   },
 
   /**

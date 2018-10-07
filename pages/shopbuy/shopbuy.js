@@ -79,7 +79,7 @@ Page({
   jupiter: function () {
     var app = getApp();
     app.globalData.detailid = 2;
-    app.globalData.body = '哈顿周末卡';
+    app.globalData.body = '哈顿节假日卡';
     app.globalData.imageNo = 6;
     this.card();
   },

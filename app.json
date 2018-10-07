@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/parterlogin/parterlogin",
+    "pages/parterinfo/parterinfo",
     "pages/login/login",
     "pages/shoplogin/shoplogin",
     "pages/shopbuy/shopbuy",

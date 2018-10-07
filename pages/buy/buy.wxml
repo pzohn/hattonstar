@@ -1,5 +1,65 @@
 <view class="content">
   <view class="list">
+      <view class="hr" wx:if="{{test}}"></view>
+     <view class="item" bindtap="star" id="0" wx:if="{{test}}">
+       <view>
+          <image src="/images/list/star9.jpg" style="width:78px;height:60px;"></image>
+       </view>
+       <view class="desc">
+         <view class="title">测试卡</view>
+         <view class="count">
+            <view>0.01元</view>
+            <view>
+              <image src="/images/icon/xingxing.jpg" style="width:18px;height:17px;"></image>
+            </view>
+            <view>单次卡</view>
+            <view>
+              <image src="/images/icon/yanjing.jpg" style="width:23px;height:17px;"></image>
+            </view>
+            <view>全日场</view>
+         </view>
+       </view>
+     </view>
+    <view class="hr" wx:if="{{flag}}"></view>
+     <view class="item" bindtap="sun" id="0" wx:if="{{flag}}">
+       <view>
+          <image src="/images/list/star9.jpg" style="width:78px;height:60px;"></image>
+       </view>
+       <view class="desc">
+         <view class="title">哈顿节假日团购卡</view>
+         <view class="count">
+            <view>179元</view>
+            <view>
+              <image src="/images/icon/xingxing.jpg" style="width:18px;height:17px;"></image>
+            </view>
+            <view>单次卡</view>
+            <view>
+              <image src="/images/icon/yanjing.jpg" style="width:23px;height:17px;"></image>
+            </view>
+            <view>全日场</view>
+         </view>
+       </view>
+     </view>
+       <view class="hr" wx:if="{{flag}}"></view>
+     <view class="item" bindtap="neptune" id="0" wx:if="{{flag}}">
+       <view>
+          <image src="/images/list/star8.jpg" style="width:78px;height:60px;"></image>
+       </view>
+       <view class="desc">
+         <view class="title">哈顿日常团购卡</view>
+         <view class="count">
+            <view>169元</view>
+            <view>
+              <image src="/images/icon/xingxing.jpg" style="width:18px;height:17px;"></image>
+            </view>
+            <view>单次卡</view>
+            <view>
+              <image src="/images/icon/yanjing.jpg" style="width:23px;height:17px;"></image>
+            </view>
+            <view>全日场</view>
+         </view>
+       </view>
+     </view>
   <view class="hr"></view>
      <view class="item" bindtap="earth" id="0">
        <view>

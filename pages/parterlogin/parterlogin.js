@@ -10,7 +10,7 @@ Page({
     account: '',
     password: ''
   },
-  
+
   login: function () {
     if (this.data.password == "") {
       wx.showModal({
@@ -20,7 +20,7 @@ Page({
       return;
     }
     wx.request({
-      url: 'https://www.hattonstar.com/getShop',
+      url: 'https://www.hattonstar.com/getParterInfo',
       data: {
         phone: this.data.account,
         pass: this.data.password
@@ -28,18 +28,9 @@ Page({
       method: 'POST',
       success: function (res) {
         if (res.data == 0) {
-          console.log(res);
           wx.showModal({
             title: '错误提示',
-            content: '商户未注册,请联系我们进行注册！',
-            confirmText: '联系我们',
-            success: function (res) {
-              if (res.confirm) {
-                wx.navigateTo({
-                  url: '../callme/callme',
-                })
-              }
-            }
+            content: '商户未注册,请联系哈顿工作人员进行商户加盟！',
           })
         }
         else if (res.data == 1) {
@@ -52,17 +43,13 @@ Page({
         else {
           if (res.data.phone != "") {
             var app = getApp();
-            app.globalData.shop_id = res.data.id;
-            app.globalData.shop_phone = res.data.phone;
-            app.globalData.shop_name = res.data.name;
-            app.globalData.shop_address = res.data.address;
-            app.globalData.shop_user = res.data.user;
-            app.globalData.card_one_num = res.data.card_one_num;
-            app.globalData.card_two_num = res.data.card_two_num;
-            app.globalData.card_one_price = res.data.card_one_price;
-            app.globalData.card_two_price = res.data.card_two_price;
+            app.globalData.parter_phone = res.data.phone;
+            app.globalData.parter_name = res.data.name;
+            app.globalData.day_num = res.data.day_num;
+            app.globalData.month_num = res.data.month_num;
+            app.globalData.total_num = res.data.total_num;
             wx.navigateTo({
-              url: '../shopinfo/shopinfo',
+              url: '../parterinfo/parterinfo',
             })
           }
           else {
@@ -106,7 +93,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
